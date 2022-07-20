@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-deployment
+  name: db-deployment
   namespace: cbennett
   labels:
-    app: app
+    app: db
 spec:
   replicas: 1
   strategy:
@@ -12,17 +12,17 @@ spec:
   minReadySeconds: 20
   selector:
     matchLabels:
-      app: app
+      app: db
   template:
     metadata:
       labels:
-        app: app
+        app: db
     spec:
       containers:
       - envFrom:
         - secretRef:
             name: db-secret
-        name: app-deployment
-        image: harbor.dev.afsmtddso.com/cbennett-harbor-project/app@sha256:7b401866e7cbe7bcb9f12de1279e36339ae349e875fe4265fad2d3d71d41b648
+        name: db-deployment
+        image: harbor.dev.afsmtddso.com/cbennett-harbor-project/db@sha256:4a6a2e0d5f935c3ee20d7e9b6d0483ec5ae061a32763d911410bf47b12d964b1
         ports:
-        - containerPort: 5000
+        - containerPort: 5432
