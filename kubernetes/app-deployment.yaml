@@ -19,7 +19,9 @@ spec:
         app: app
     spec:
       containers:
-      - envFrom:
+      - envFrom:  
+        - configMapRef:
+            name: feature-toggle
         - secretRef:
             name: db-secret
         name: app-deployment
